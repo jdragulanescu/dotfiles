@@ -20,7 +20,7 @@ fi
 # Clone dotfiles if not present
 if [ ! -d "$HOME/dotfiles" ]; then
     echo "[2/7] Cloning dotfiles..."
-    git clone https://github.com/skylightxo/dotfiles.git ~/dotfiles
+    git clone https://github.com/jdragulanescu/dotfiles.git ~/dotfiles
 else
     echo "[2/7] Dotfiles already cloned"
 fi
