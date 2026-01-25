@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "MCP_DOCKER": {
+      "command": "docker",
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ]
+    },
+    "Notion": {
+      "url": "https://mcp.notion.com/mcp",
+      "headers": {}
+    }
+  }
+}

@@ -1,0 +1,101 @@
+# Taps
+tap "hashicorp/tap"
+tap "homebrew/cask-fonts"
+
+# ============================================
+# CLI TOOLS
+# ============================================
+brew "gh"                         # GitHub CLI
+brew "starship"                   # Shell prompt
+brew "stow"                       # Dotfiles symlink manager
+brew "gitleaks"                   # Secret scanner
+
+# Shell plugins
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# Modern CLI replacements
+brew "bat"                        # Better cat
+brew "eza"                        # Better ls
+brew "fd"                         # Better find
+brew "fzf"                        # Fuzzy finder
+brew "ripgrep"                    # Better grep
+brew "git-delta"                  # Better git diff
+brew "zoxide"                     # Smarter cd
+brew "jq"                         # JSON processor
+brew "tree"                       # Directory tree
+
+# Development
+brew "awscli"                     # AWS CLI
+brew "hashicorp/tap/terraform"    # Infrastructure as code
+brew "vercel-cli"                 # Vercel deployments
+
+# Version managers
+brew "pyenv"                      # Python version manager
+brew "node"                       # Node.js
+
+# System & Security
+brew "gnupg"                      # GPG encryption
+brew "pinentry-mac"               # GPG PIN entry
+brew "mas"                        # Mac App Store CLI
+
+# Networking
+brew "nmap"                       # Network scanner
+brew "iperf3"                     # Network bandwidth testing
+
+# ============================================
+# APPS (Casks)
+# ============================================
+cask "warp"                       # Terminal
+cask "cursor"                     # AI code editor
+cask "claude"                     # Claude desktop
+cask "claude-code"                # Claude code editor
+cask "brave-browser"              # Browser
+cask "obsidian"                   # Notes
+cask "raycast"                    # Launcher
+cask "gcloud-cli"                 # Google Cloud
+cask "gpg-suite"                  # GPG tools
+cask "shottr"                     # Screenshots
+cask "tailscale-app"              # VPN
+cask "requestly"                  # API testing
+
+# Fonts
+cask "font-jetbrains-mono-nerd-font"
+cask "font-fira-code"
+
+# ============================================
+# MAC APP STORE
+# ============================================
+mas "Keynote", id: 409183694
+mas "Microsoft Remote Desktop", id: 1295203466
+mas "NordVPN", id: 905953485
+mas "Numbers", id: 409203825
+mas "Pages", id: 409201541
+mas "WhatsApp", id: 310633997
+
+# ============================================
+# CURSOR/VSCODE EXTENSIONS
+# ============================================
+vscode "aaron-bond.better-comments"
+vscode "anthropic.claude-code"
+vscode "anysphere.remote-containers"
+vscode "bradlc.vscode-tailwindcss"
+vscode "dbaeumer.vscode-eslint"
+vscode "eamodio.gitlens"
+vscode "editorconfig.editorconfig"
+vscode "equinusocio.vsc-material-theme-icons"
+vscode "esbenp.prettier-vscode"
+vscode "evondev.dracula-high-contrast"
+vscode "formulahendry.docker-explorer"
+vscode "github.vscode-github-actions"
+vscode "hashicorp.terraform"
+vscode "mhutchie.git-graph"
+vscode "ms-azuretools.vscode-docker"
+vscode "ms-vscode.atom-keybindings"
+vscode "ms-vsliveshare.vsliveshare"
+vscode "mylesmurphy.prettify-ts"
+vscode "pkief.material-icon-theme"
+vscode "prisma.prisma"
+vscode "repreng.csv"
+vscode "ritwickdey.liveserver"
+vscode "yoavbls.pretty-ts-errors"

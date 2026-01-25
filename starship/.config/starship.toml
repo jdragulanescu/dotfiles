@@ -1,0 +1,352 @@
+# Starship Prompt Configuration
+# Nerd Font icons + Bracketed languages + Dracula colors
+# Find symbols at: https://www.nerdfonts.com/cheat-sheet
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$package\
+$nodejs\
+$bun\
+$deno\
+$python\
+$rust\
+$golang\
+$java\
+$kotlin\
+$lua\
+$ruby\
+$swift\
+$zig\
+$docker_context\
+$cmd_duration\
+$fill\
+$battery\
+$time
+$character"""
+
+add_newline = false
+
+# ============================================
+# PROMPT CHARACTER
+# ============================================
+[character]
+success_symbol = "[❯](bold #50fa7b)"   # ❯ chevron
+error_symbol = "[❯](bold #ff5555)"     # ❯ chevron
+
+# ============================================
+# DIRECTORY & GIT
+# ============================================
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold #8be9fd"
+read_only = " 󰌾"
+
+[git_branch]
+symbol = " "
+style = "bold #bd93f9"
+
+[git_status]
+style = "bold #ff79c6"
+conflicted = " "  # conflict
+ahead = " "       # arrow up
+behind = " "      # arrow down
+diverged = " "    # arrows up-down
+untracked = " "   # question mark
+stashed = " "     # inbox
+modified = " "    # pencil
+staged = " "      # plus
+renamed = " "     # arrow right
+deleted = " "     # x
+
+# ============================================
+# LANGUAGES - BRACKETED
+# ============================================
+[nodejs]
+symbol = " "      # node.js
+style = "bold #50fa7b"
+format = "[$symbol($version)]($style) "
+
+[bun]
+symbol = " "      # bun
+style = "bold #50fa7b"
+format = "[$symbol($version)]($style) "
+
+[deno]
+symbol = " "
+style = "bold #50fa7b"
+format = "[$symbol($version)]($style) "
+
+[python]
+symbol = " "
+style = "bold #f1fa8c"
+format = "[$symbol($version)]($style) "
+
+[rust]
+symbol = "󱘗 "
+style = "bold #ffb86c"
+format = "[$symbol($version)]($style) "
+
+[golang]
+symbol = " "
+style = "bold #8be9fd"
+format = "[$symbol($version)]($style) "
+
+[java]
+symbol = " "
+style = "bold #ff5555"
+format = "[$symbol($version)]($style) "
+
+[kotlin]
+symbol = " "
+style = "bold #bd93f9"
+format = "[$symbol($version)]($style) "
+
+[lua]
+symbol = " "
+style = "bold #8be9fd"
+format = "[$symbol($version)]($style) "
+
+[ruby]
+symbol = " "
+style = "bold #ff5555"
+format = "[$symbol($version)]($style) "
+
+[swift]
+symbol = " "
+style = "bold #ffb86c"
+format = "[$symbol($version)]($style) "
+
+[zig]
+symbol = " "
+style = "bold #ffb86c"
+format = "[$symbol($version)]($style) "
+
+# ============================================
+# TOOLS
+# ============================================
+[docker_context]
+symbol = " "
+style = "bold #8be9fd"
+format = "[\\[$symbol$context\\]]($style) "
+
+[aws]
+symbol = " "
+
+[gcloud]
+symbol = " "
+
+[package]
+symbol = "󰏗 "
+style = "bold #ffb86c"
+format = "[$symbol$version]($style) "
+
+# ============================================
+# INFO - NO BRACKETS
+# ============================================
+[cmd_duration]
+min_time = 2_000
+style = "bold #f1fa8c"
+format = "[ $duration]($style) "
+
+[fill]
+symbol = " "
+
+[battery]
+full_symbol = " "
+charging_symbol = " "    # lightning
+discharging_symbol = " " # battery mid
+
+[[battery.display]]
+threshold = 20
+style = "bold #ff5555"
+
+[[battery.display]]
+threshold = 50
+style = "bold #ffb86c"
+
+[[battery.display]]
+threshold = 100
+style = "#50fa7b"
+
+[time]
+disabled = false
+style = "#6272a4"
+time_format = "%H:%M"
+format = "[ $time]($style)"   # clock
+
+# ============================================
+# SSH ONLY
+# ============================================
+[username]
+style_user = "bold #bd93f9"
+style_root = "bold #ff5555"
+show_always = false
+
+[hostname]
+style = "bold #ff79c6"
+ssh_symbol = " "
+ssh_only = true
+
+
+# ============================================
+# OTHER NERD FONT SYMBOLS (for future use)
+# ============================================
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
+
+[cmake]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fortran]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_commit]
+tag_symbol = '  '
+
+[gradle]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[os]
+disabled = false
+style = "bold #f8f8f2"
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+AOSC = " "
+Arch = " "
+Artix = " "
+CachyOS = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Elementary = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Ios = "󰀷 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+Nobara = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+Zorin = " "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[pixi]
+symbol = "󰏗 "
+
+[rlang]
+symbol = "󰟔 "
+
+[scala]
+symbol = " "
+
+[status]
+symbol = " "
+
+[xmake]
+symbol = " "
+

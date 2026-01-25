@@ -1,0 +1,62 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Secrets (never commit these)
+*.pem
+*.key
+.env
+.env.*
+credentials.json
+
+# Docker data volumes (don't commit database data)
+docker/docker/*/data/
+docker/docker/*-data/
+docker/docker/mongo/mongo-data/
+docker/docker/postgres/pgadmin-data/
+docker/docker/postgres/postgres-data/
+docker/docker/redis/redis-data/
+*.wt
+*.lock
+*.bson
+*.rdb
+*.db
+journal/
+diagnostic.data/
+
+# Nested git repos
+prompts/prompts/coding/cursor-commands/
+prompts/prompts/system/cursor-hooks/
+
+# Claude cache/session files (don't sync)
+claude/.claude/cache/
+claude/.claude/debug/
+claude/.claude/file-history/
+claude/.claude/plans/
+claude/.claude/plugins/
+claude/.claude/projects/
+claude/.claude/session-env/
+claude/.claude/shell-snapshots/
+claude/.claude/statsig/
+claude/.claude/todos/
+claude/.claude/history.jsonl
+claude/.claude/stats-cache.json
+claude/.claude/security_warnings_state_*.json
+claude/.claude/.last-journal-run
+
+# SSH keys (only config, not keys)
+ssh/.ssh/id_*
+ssh/.ssh/known_hosts
+ssh/.ssh/*.pub
+
+# Cursor cache/session files (don't sync)
+cursor/.cursor/ai-tracking/
+cursor/.cursor/extensions/
+cursor/.cursor/plans/
+cursor/.cursor/projects/
+cursor/.cursor/ide_state.json

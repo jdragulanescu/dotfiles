@@ -1,0 +1,67 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(curl:*)",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)",
+      "Read(**/.env*)",
+      "Read(**/env.php*)",
+      "Read(**/*.pem)",
+      "Read(**/*.key)",
+      "Read(**/secrets/**)",
+      "Read(**/credentials/**)",
+      "Read(**/.aws/**)",
+      "Read(**/.ssh/**)",
+      "Read(**/config/database.yml)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/scripts/daily-journal-check.sh",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/scripts/log-activity.sh prompt",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/scripts/log-activity.sh stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "local-review@agent37-skills": true,
+    "commit-commands@claude-code-plugins": true,
+    "feature-dev@claude-code-plugins": true,
+    "security-guidance@claude-code-plugins": true,
+    "code-review@claude-code-plugins": true
+  },
+  "alwaysThinkingEnabled": true,
+  "statusLine": {
+    "type": "command",
+    "command": "$HOME/.claude/scripts/statusline.sh"
+  }
+}
