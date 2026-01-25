@@ -110,7 +110,7 @@ alias reload="source ~/.zshrc"
 alias path='echo $PATH | tr ":" "\n"'
 alias ip="curl -s ifconfig.me"
 alias localip="ipconfig getifaddr en0"
-alias weather="curl wttr.in"
+alias weather="curl wttr.in/london"
 alias ports="lsof -i -P -n | grep LISTEN"
 
 # ============================================
