@@ -1,12 +1,11 @@
 # ============================================
 # NAVIGATION
 # ============================================
+alias cd="z"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias dev="cd ~/development"
-alias personal="cd ~/development/personal"
-alias clients="cd ~/development/clients"
 alias dotfiles="cd ~/dotfiles"
 
 # ============================================
