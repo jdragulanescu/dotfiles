@@ -103,9 +103,9 @@ alias grep="rg"
 # ============================================
 # SHORTCUTS
 # ============================================
-alias c="cursor ."
-alias zshrc="cursor ~/.zshrc"
-alias aliases="cursor ~/.aliases"
+alias c="code ."
+alias zshrc="code ~/.zshrc"
+alias aliases="code ~/.aliases"
 alias reload="source ~/.zshrc"
 alias path='echo $PATH | tr ":" "\n"'
 alias ip="curl -s ifconfig.me"
@@ -134,7 +134,7 @@ alias tfv="terraform validate"
 # AI
 # ============================================
 
-alias ai-journal="cursor /ai-journal"
+alias ai-journal="claude /ai-journal"
 
 # AI
 alias cc='claude'
