@@ -3,6 +3,7 @@
 ## Git Commit Rules
 
 ### Co-Authorship Policy
+
 - **NEVER** add Claude as a co-author to git commits
 - **NEVER** include "Co-Authored-By: Claude <noreply@anthropic.com>" in commit messages
 - **NEVER** add "🤖 Generated with [Claude Code](https://claude.com/claude-code)" to commit messages
@@ -20,18 +21,21 @@
 The user has modern CLI tool replacements configured. When running Bash commands, use these instead of standard tools:
 
 ### Standard Command Overrides
-| Standard | Replacement | Notes |
-|----------|-------------|-------|
-| `find` | `fd` | Modern find alternative with simpler syntax |
-| `grep` | `rg` | ripgrep - faster grep with better defaults |
-| `ls` | `eza` | Modern ls with icons and git integration |
-| `cd` | `z` | zoxide - smarter cd with frecency tracking |
+
+| Standard | Replacement | Notes                                       |
+| -------- | ----------- | ------------------------------------------- |
+| `find`   | `fd`        | Modern find alternative with simpler syntax |
+| `grep`   | `rg`        | ripgrep - faster grep with better defaults  |
+| `ls`     | `eza`       | Modern ls with icons and git integration    |
+| `cd`     | `z`         | zoxide - smarter cd with frecency tracking  |
 
 ### Usage Examples
+
 - Use `fd pattern` instead of `find . -name "pattern"`
 - Use `rg pattern` instead of `grep -r pattern`
-- Use `eza -la` instead of `ls -la`
+- Use `lsa` or `eza -la` instead of `ls -la`
 
 ### Additional Modern Tools Available
+
 - `bat` - cat replacement with syntax highlighting
 - `fzf` - fuzzy finder for interactive selection

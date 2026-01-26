@@ -82,7 +82,7 @@ alias kns="kubectl config set-context --current --namespace"
 alias ls='eza -lh --group-directories-first --icons=auto'
 
 # List all files (including hidden)
-alias lsa='ls -a'
+alias lsa='eza -la'
 
 # Long listing format (equivalent to ls -l)
 alias ll='eza -lha --group-directories-first --icons=auto'
