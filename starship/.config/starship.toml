@@ -55,6 +55,9 @@ style = "bold #bd93f9"
 [git_status]
 style = "bold #ff79c6"
 up_to_date = " ✓"
+ahead = " ⇡${count}"
+behind = " ⇣${count}"
+diverged = " ⇡${ahead_count}⇣${behind_count}"
 stashed = ""
 
 
