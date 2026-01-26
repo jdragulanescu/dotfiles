@@ -30,7 +30,7 @@ $battery\
 $time
 $character"""
 
-add_newline = false
+add_newline = true
 
 # ============================================
 # PROMPT CHARACTER
