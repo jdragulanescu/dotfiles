@@ -54,16 +54,9 @@ style = "bold #bd93f9"
 
 [git_status]
 style = "bold #ff79c6"
-conflicted = " "  # conflict
-ahead = " "       # arrow up
-behind = " "      # arrow down
-diverged = " "    # arrows up-down
-untracked = " "   # question mark
-stashed = " "     # inbox
-modified = " "    # pencil
-staged = " "      # plus
-renamed = " "     # arrow right
-deleted = " "     # x
+up_to_date = " ✓"
+stashed = ""
+
 
 # ============================================
 # LANGUAGES - BRACKETED
