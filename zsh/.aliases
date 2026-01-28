@@ -1,7 +1,6 @@
 # ============================================
 # NAVIGATION
 # ============================================
-alias cd="z"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -138,36 +137,3 @@ alias ai-journal="claude /ai-journal"
 
 # AI
 alias cc='claude'
-
-# Full multi-agent workflow                                                                               
-alias cc-build='claude "I want you to build $1 using a multi-agent workflow.                              
-                                                                                                          
-Follow these phases, stopping after each for my approval:                                                 
-                                                                                                          
-## Phase 1: Planning (Parallel)                                                                           
-Spawn these planning agents in parallel:                                                                  
-- planning-architecture: Design system architecture and component breakdown                               
-- planning-ux: Analyze user flows and edge cases                                                          
-- planning-security: Define security requirements and testing strategy                                    
-                                                                                                          
-Synthesize their outputs and present the combined plan.                                                   
-                                                                                                          
-## Phase 2: Plan Documentation                                                                            
-After I approve, spawn a haiku agent to write the plan to .plan in the project root.                      
-                                                                                                          
-## Phase 3: Implementation (Parallel)                                                                     
-After I approve .plan, spawn 2-3 coder agents in parallel for specific components.                        
-                                                                                                          
-## Phase 4: Code Review                                                                                   
-After coding completes, spawn code-reviewer agent for security review.                                    
-                                                                                                          
-## Phase 5: Testing                                                                                       
-After review, spawn test-generator agent for unit/integration/security tests.                             
-                                                                                                          
-Stop after each phase for approval."'                                                                     
-                                                                                                          
-# Quick single-purpose aliases                                                                            
-alias cc-plan='claude "Spawn planning-architecture, planning-ux, and planning-security agents in parallel 
-to analyze:"'                                                                                             
-alias cc-review='claude "Use the code-reviewer agent to review:"'                                         
-alias cc-test='claude "Use the test-generator agent to write tests for:"'    

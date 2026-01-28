@@ -27,6 +27,14 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/skylight/.claude/hooks/sky-check-update.js\""
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -62,6 +70,6 @@
   "alwaysThinkingEnabled": true,
   "statusLine": {
     "type": "command",
-    "command": "$HOME/.claude/scripts/statusline.sh"
+    "command": "$HOME/.claude/scripts/statusline.js"
   }
 }
