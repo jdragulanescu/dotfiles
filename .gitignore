@@ -49,6 +49,8 @@ claude/.claude/stats-cache.json
 claude/.claude/security_warnings_state_*.json
 claude/.claude/.last-journal-run
 
+.sky/
+
 # SSH keys (only config, not keys)
 ssh/.ssh/id_*
 ssh/.ssh/known_hosts

@@ -78,7 +78,7 @@ command -v pyenv >/dev/null && eval "$(pyenv init -)"
 # TOOLS
 # ============================================
 eval "$(starship init zsh)"
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # iTerm2 integration (optional)
 [ -f "${HOME}/.iterm2_shell_integration.zsh" ] && \
