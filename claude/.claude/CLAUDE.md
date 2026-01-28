@@ -16,26 +16,94 @@
 - **NEVER** start a development server - the user already has one running
 - Assume a dev server is always active and available
 
-## Shell Command Aliases
+## Shell Commands — CRITICAL
 
-The user has modern CLI tool replacements configured. When running Bash commands, use these instead of standard tools:
+**The user has `find` and `grep` aliased to `fd` and `rg`. These have COMPLETELY DIFFERENT syntax. Using standard find/grep syntax WILL FAIL.**
 
-### Standard Command Overrides
+### MANDATORY: Use fd instead of find
 
-| Standard | Replacement | Notes                                       |
-| -------- | ----------- | ------------------------------------------- |
-| `find`   | `fd`        | Modern find alternative with simpler syntax |
-| `grep`   | `rg`        | ripgrep - faster grep with better defaults  |
-| `ls`     | `eza`       | Modern ls with icons and git integration    |
-| `cd`     | `z`         | zoxide - smarter cd with frecency tracking  |
+**NEVER use find syntax. It will break.**
 
-### Usage Examples
+```bash
+# WRONG - will fail (find syntax doesn't work with fd)
+find . -name "*.js"
+find . -type f -name "config*"
+find src -name "*.ts" -exec cat {} \;
 
-- Use `fd pattern` instead of `find . -name "pattern"`
-- Use `rg pattern` instead of `grep -r pattern`
-- Use `lsa` or `eza -la` instead of `ls -la`
+# CORRECT - use fd syntax
+fd ".js$"
+fd "config" --type f
+fd ".ts$" src --exec cat {}
+```
 
-### Additional Modern Tools Available
+**fd syntax quick reference:**
 
-- `bat` - cat replacement with syntax highlighting
-- `fzf` - fuzzy finder for interactive selection
+- `fd pattern` — search for pattern in filenames
+- `fd pattern path` — search in specific path
+- `fd -e js` — filter by extension
+- `fd -t f` — files only (`-t d` for directories)
+- `fd -H` — include hidden files
+- `fd -I` — include gitignored files
+- `fd pattern --exec cmd {}` — execute command on results
+
+### MANDATORY: Use rg instead of grep
+
+**NEVER use grep syntax. It will break.**
+
+```bash
+# WRONG - will fail (grep syntax doesn't work with rg)
+grep -r "pattern" .
+grep -rn "TODO" --include="*.js"
+grep -E "regex" file.txt
+
+# CORRECT - use rg syntax
+rg "pattern"
+rg "TODO" -g "*.js"
+rg "regex" file.txt
+```
+
+**rg syntax quick reference:**
+
+- `rg pattern` — search recursively (default)
+- `rg pattern path` — search in specific path
+- `rg -g "*.js" pattern` — filter by glob
+- `rg -t js pattern` — filter by type
+- `rg -i pattern` — case insensitive
+- `rg -l pattern` — list files only
+- `rg -C 3 pattern` — show 3 lines context
+
+### MANDATORY: Use builtin cd for scripting
+
+**`cd` is aliased to `z` (zoxide). Zoxide is for interactive use only and will fail in scripts or command chains.**
+
+```bash
+# WRONG - will fail (zoxide not meant for scripting)
+cd /some/path && command
+(cd /some/path && command)
+
+# CORRECT - use builtin cd
+builtin cd /some/path && command
+(builtin cd /some/path && command)
+
+# BEST - avoid cd entirely when possible
+fd -e md . /some/path | xargs ...
+rg "pattern" /some/path
+```
+
+**When to use `builtin cd`:**
+
+- Command chaining: `builtin cd /path && cmd`
+- Subshells: `(builtin cd /path && cmd)`
+- Any non-interactive directory change
+
+**When `z` is fine:**
+
+- Interactive terminal use only
+
+### Other Modern Tools
+
+| Instead of | Use   | Notes                              |
+| ---------- | ----- | ---------------------------------- |
+| `ls`       | `eza` | aliased, or use `lsa`, `ll`        |
+| `cat`      | `bat` | syntax highlighting                |
+| `cd`       | `z`   | interactive only, see section above |

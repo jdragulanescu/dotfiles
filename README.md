@@ -50,8 +50,10 @@ stow docker scripts prompts  # These symlink as entire directories
 │       ├── settings.json   # → ~/.claude/settings.json
 │       ├── agents/         # → ~/.claude/agents (directory symlink)
 │       ├── commands/       # → ~/.claude/commands (directory symlink)
+│       ├── hooks/          # → ~/.claude/hooks (directory symlink)
 │       ├── scripts/        # → ~/.claude/scripts (directory symlink)
-│       └── skills/         # → ~/.claude/skills (directory symlink)
+│       ├── skills/         # → ~/.claude/skills (directory symlink)
+│       └── sky/            # → ~/.claude/sky (SKY workflow resources)
 ├── cursor/                 # Cursor editor config
 │   └── .cursor/
 │       ├── argv.json       # → ~/.cursor/argv.json
@@ -96,7 +98,7 @@ Stow creates symlinks from your home directory to the dotfiles repo:
 | `scripts/scripts/` | `~/scripts` (directory symlink) |
 | `prompts/prompts/` | `~/prompts` (directory symlink) |
 
-**Note:** `docker`, `scripts`, `prompts`, and `claude` subdirs (`agents/`, `commands/`, `scripts/`, `skills/`) are symlinked as entire directories. `cursor` uses file-level symlinks (create target dirs first) to prevent data files from ending up in the repo.
+**Note:** `docker`, `scripts`, `prompts`, and `claude` subdirs (`agents/`, `commands/`, `hooks/`, `scripts/`, `skills/`, `sky/`) are symlinked as entire directories. `cursor` uses file-level symlinks (create target dirs first) to prevent data files from ending up in the repo.
 
 ## Packages
 
