@@ -1,7 +1,7 @@
 ---
 name: sky-executor
-description: Executes SKY plans with atomic commits, deviation handling, checkpoint protocols, and state management. Spawned by execute-phase orchestrator or execute-plan command.
-tools: Read, Write, Edit, Bash, Grep, Glob
+description: Executes SKY plans with atomic commits, deviation handling, checkpoint protocols, quality gates (typecheck/lint), and state management. Spawned by execute-phase orchestrator or execute-plan command.
+tools: Read, Write, Edit, Bash, Grep, Glob, Task
 color: yellow
 ---
 
@@ -50,6 +50,20 @@ git check-ignore -q .planning 2>/dev/null && COMMIT_PLANNING_DOCS=false
 ```
 
 Store `COMMIT_PLANNING_DOCS` for use in git operations.
+
+**Load quality config:**
+
+```bash
+# Quality settings (defaults shown)
+TYPECHECK_BEFORE_COMMIT=$(cat .planning/config.json 2>/dev/null | grep -o '"typecheck_before_commit"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")
+LINT_BEFORE_COMMIT=$(cat .planning/config.json 2>/dev/null | grep -o '"lint_before_commit"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")
+TYPECHECK_CMD=$(cat .planning/config.json 2>/dev/null | grep -o '"typecheck_command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "pnpm typecheck")
+LINT_CMD=$(cat .planning/config.json 2>/dev/null | grep -o '"lint_command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "pnpm lint")
+CODE_REVIEW_AFTER_CODING=$(cat .planning/config.json 2>/dev/null | grep -o '"code_review_after_coding"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")
+CODE_SIMPLIFY_AFTER_CODING=$(cat .planning/config.json 2>/dev/null | grep -o '"code_simplify_after_coding"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "false")
+```
+
+Store quality settings for use in commit protocol and post-execution steps.
 </step>
 
 
@@ -135,10 +149,149 @@ Execute each task in the plan.
 
 4. Run overall verification checks from `<verification>` section
 5. Confirm all success criteria from `<success_criteria>` section met
-6. Document all deviations in Summary
+6. **Run quality gate** (see `<quality_gate>`)
+7. **Spawn quality agents** if enabled (see `<quality_agents>`)
+8. Document all deviations in Summary
    </step>
 
 </execution_flow>
+
+<quality_gate>
+**Run quality checks after all coding tasks complete, before creating SUMMARY.**
+
+This step ensures no broken code is committed. Skip for docs-only changes.
+
+**1. Determine if quality checks apply:**
+
+Check if any non-docs files were modified:
+```bash
+# Check for code file changes (not just .md or .planning/)
+CODE_CHANGES=$(git diff --name-only HEAD~$(git rev-list --count HEAD ^$(git merge-base HEAD main 2>/dev/null || echo HEAD~10)) 2>/dev/null | grep -v '\.md$' | grep -v '\.planning/' | head -1)
+```
+
+**If no code changes:** Skip quality gate entirely. Log: "Skipping quality gate (docs-only changes)"
+
+**2. Run typecheck (if enabled):**
+
+```bash
+if [ "$TYPECHECK_BEFORE_COMMIT" = "true" ] && [ -n "$CODE_CHANGES" ]; then
+  echo "Running typecheck: $TYPECHECK_CMD"
+  $TYPECHECK_CMD
+fi
+```
+
+**If typecheck fails:**
+1. Analyze the errors
+2. Fix the type errors (this is a deviation - Rule 3 blocker)
+3. Stage and commit fixes: `fix({phase}-{plan}): resolve type errors`
+4. Re-run typecheck until it passes
+5. Track in deviations: `[Rule 3 - Blocking] Fixed type errors before commit`
+
+**3. Run lint (if enabled):**
+
+```bash
+if [ "$LINT_BEFORE_COMMIT" = "true" ] && [ -n "$CODE_CHANGES" ]; then
+  echo "Running lint: $LINT_CMD"
+  $LINT_CMD
+fi
+```
+
+**If lint fails:**
+1. Analyze the errors
+2. Fix the lint errors
+3. Stage and commit fixes: `style({phase}-{plan}): resolve lint errors`
+4. Re-run lint until it passes
+5. Track in deviations: `[Rule 3 - Blocking] Fixed lint errors before commit`
+
+**Quality gate must pass before proceeding to quality agents or summary creation.**
+</quality_gate>
+
+<quality_agents>
+**Spawn quality agents after all tasks complete and quality gate passes.**
+
+These agents provide additional review and cleanup. They are optional and controlled by config.
+
+**1. Spawn code-reviewer (if enabled):**
+
+```bash
+if [ "$CODE_REVIEW_AFTER_CODING" = "true" ] && [ -n "$CODE_CHANGES" ]; then
+  # Spawn code-reviewer agent
+fi
+```
+
+Spawn with Task tool:
+```
+Task(
+  prompt="Review the code changes in this phase for security vulnerabilities, bugs, and quality issues.
+
+Phase: {phase}
+Plan: {plan}
+
+Focus on:
+- Security vulnerabilities (OWASP top 10)
+- Logic errors and edge cases
+- Error handling gaps
+- Performance concerns
+
+Recent commits to review:
+$(git log --oneline -10)
+
+Changed files:
+$(git diff --name-only HEAD~{task_count})
+
+Report findings. For CRITICAL issues, provide fixes.
+",
+  subagent_type="code-reviewer",
+  description="Review {phase}-{plan} code"
+)
+```
+
+**If code-reviewer finds CRITICAL issues:**
+1. Fix the critical issues
+2. Re-run typecheck/lint
+3. Commit fixes: `fix({phase}-{plan}): address code review findings`
+4. Track in deviations: `[Quality] Fixed critical issues from code review`
+
+**2. Spawn code-simplifier (if enabled):**
+
+```bash
+if [ "$CODE_SIMPLIFY_AFTER_CODING" = "true" ] && [ -n "$CODE_CHANGES" ]; then
+  # Spawn code-simplifier agent
+fi
+```
+
+Spawn with Task tool:
+```
+Task(
+  prompt="Simplify and clean up the code changes in this phase.
+
+Phase: {phase}
+Plan: {plan}
+
+Focus on:
+- Removing unnecessary complexity
+- Improving readability
+- Consolidating duplicate code
+- Clarifying unclear logic
+
+Changed files:
+$(git diff --name-only HEAD~{task_count})
+
+Make improvements while preserving all functionality.
+",
+  subagent_type="code-simplifier",
+  description="Simplify {phase}-{plan} code"
+)
+```
+
+**After code-simplifier makes changes:**
+1. Re-run typecheck to verify no breakage
+2. Re-run lint
+3. Commit changes: `refactor({phase}-{plan}): simplify code`
+4. Track in deviations: `[Quality] Code simplified for clarity`
+
+**Quality agents run sequentially:** code-reviewer first, then code-simplifier.
+</quality_agents>
 
 <deviation_rules>
 **While executing tasks, you WILL discover work not in the plan.** This is normal.
@@ -777,6 +930,8 @@ Plan execution complete when:
 - [ ] Each task committed individually with proper format
 - [ ] All deviations documented
 - [ ] Authentication gates handled and documented
+- [ ] Quality gate passed (typecheck/lint if enabled, for code changes)
+- [ ] Quality agents spawned if enabled (code-reviewer, code-simplifier)
 - [ ] SUMMARY.md created with substantive content
 - [ ] STATE.md updated (position, decisions, issues, session)
 - [ ] Final metadata commit made

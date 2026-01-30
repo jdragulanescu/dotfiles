@@ -335,6 +335,58 @@ questions: [
 ]
 ```
 
+**Round 3 — Quality settings:**
+
+These control code quality checks during execution.
+
+| Setting | When it runs | What it does |
+|---------|--------------|--------------|
+| **Typecheck** | Before commits | Blocks commits if TypeScript errors exist |
+| **Lint** | Before commits | Blocks commits if lint errors exist |
+| **Code Reviewer** | After coding tasks | Spawns security/bug analysis agent |
+| **Code Simplifier** | After coding tasks | Spawns cleanup/simplification agent |
+
+```
+questions: [
+  {
+    header: "Typecheck",
+    question: "Block commits with TypeScript errors?",
+    multiSelect: false,
+    options: [
+      { label: "Yes (Recommended)", description: "Run typecheck before every commit" },
+      { label: "No", description: "Allow commits with type errors" }
+    ]
+  },
+  {
+    header: "Lint",
+    question: "Block commits with lint errors?",
+    multiSelect: false,
+    options: [
+      { label: "Yes (Recommended)", description: "Run lint before every commit" },
+      { label: "No", description: "Allow commits with lint errors" }
+    ]
+  },
+  {
+    header: "Review",
+    question: "Spawn code-reviewer after coding tasks?",
+    multiSelect: false,
+    options: [
+      { label: "Yes (Recommended)", description: "Security/bug analysis after code changes" },
+      { label: "No", description: "Skip automatic code review" }
+    ]
+  },
+  {
+    header: "Simplify",
+    question: "Spawn code-simplifier after coding tasks?",
+    multiSelect: false,
+    options: [
+      { label: "No (Default)", description: "Keep code as written" },
+      { label: "Yes", description: "Cleanup and simplify after code changes" }
+    ]
+  }
+]
+```
+
 Create `.planning/config.json` with all settings:
 
 ```json
@@ -348,6 +400,14 @@ Create `.planning/config.json` with all settings:
     "research": true|false,
     "plan_check": true|false,
     "verifier": true|false
+  },
+  "quality": {
+    "typecheck_before_commit": true|false,
+    "lint_before_commit": true|false,
+    "typecheck_command": "pnpm typecheck",
+    "lint_command": "pnpm lint",
+    "code_review_after_coding": true|false,
+    "code_simplify_after_coding": true|false
   }
 }
 ```
