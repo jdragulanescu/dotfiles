@@ -986,6 +986,41 @@ COMMIT_PLANNING_DOCS=$(cat .planning/config.json 2>/dev/null | grep -o '"commit_
 git check-ignore -q .planning 2>/dev/null && COMMIT_PLANNING_DOCS=false
 ```
 
+**Run quality checks before committing (if config exists):**
+
+If `.planning/config.json` exists, run typecheck and lint before committing:
+
+```bash
+# Load quality settings (defaults: typecheck=true, lint=true)
+TYPECHECK_BEFORE_COMMIT=$(cat .planning/config.json 2>/dev/null | grep -o '"typecheck_before_commit"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")
+LINT_BEFORE_COMMIT=$(cat .planning/config.json 2>/dev/null | grep -o '"lint_before_commit"[[:space:]]*:[[:space:]]*[^,}]*' | grep -o 'true\|false' || echo "true")
+TYPECHECK_CMD=$(cat .planning/config.json 2>/dev/null | grep -o '"typecheck_command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "pnpm typecheck")
+LINT_CMD=$(cat .planning/config.json 2>/dev/null | grep -o '"lint_command"[[:space:]]*:[[:space:]]*"[^"]*"' | sed 's/.*:.*"\([^"]*\)"/\1/' || echo "pnpm lint")
+```
+
+**Run typecheck (if enabled):**
+```bash
+[ "$TYPECHECK_BEFORE_COMMIT" = "true" ] && $TYPECHECK_CMD
+```
+
+If typecheck fails:
+1. Analyze the type errors in the output
+2. Fix the type errors in your bug fix (you may have introduced them or they may be pre-existing)
+3. Re-run typecheck until it passes
+4. Note in Resolution section: "Fixed type errors as part of bug fix"
+
+**Run lint (if enabled):**
+```bash
+[ "$LINT_BEFORE_COMMIT" = "true" ] && $LINT_CMD
+```
+
+If lint fails:
+1. Analyze the lint errors in the output
+2. Fix the lint errors
+3. Re-run lint until it passes
+
+**Only proceed to commit after both checks pass.** The bug fix is not complete until quality checks pass.
+
 **Commit the fix:**
 
 If `COMMIT_PLANNING_DOCS=true` (default):
