@@ -40,9 +40,9 @@ Generate a daily journal summary from the activity log in `~/.journal/raw/`.
    - If `$ARGUMENTS` contains `--week`, process last 7 days
    - **Default behavior (no arguments)**: Find all missing days since the last summary
 
-     a. Find the most recent summary file:
+     a. Find the most recent summary file (summaries are in ~/.journal/summaries/YYYY/MM/):
      ```bash
-     find ~/.journal/summaries -name "*.md" -type f 2>/dev/null | sort | tail -1
+     find ~/.journal/summaries -path "*/[0-9][0-9][0-9][0-9]/[0-9][0-9]/*.md" -type f 2>/dev/null | sort | tail -1
      ```
 
      b. Extract the date from the filename (YYYY-MM-DD.md)
@@ -98,9 +98,15 @@ Generate a daily journal summary from the activity log in `~/.journal/raw/`.
 
 6. **Save summary**:
    ```bash
+   # IMPORTANT: Use YYYY/MM format (e.g., 2026/01), NOT YYYY-MM
    mkdir -p ~/.journal/summaries/YYYY/MM/
    ```
    Write to `~/.journal/summaries/YYYY/MM/YYYY-MM-DD.md`
+
+   **Path format examples:**
+   - For January 24, 2026: `~/.journal/summaries/2026/01/2026-01-24.md`
+   - For December 5, 2025: `~/.journal/summaries/2025/12/2025-12-05.md`
+   - WRONG: `~/.journal/summaries/2026-01/...` (never use dashes in folder names)
 
 ## Example Raw Log Entry
 
