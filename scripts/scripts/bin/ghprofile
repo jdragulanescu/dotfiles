@@ -84,10 +84,6 @@ fetch_github_data() {
             following { totalCount }
             repositories(privacy: PUBLIC, ownerAffiliations: OWNER) { totalCount }
             contributionsCollection {
-                totalCommitContributions
-                totalPullRequestContributions
-                totalIssueContributions
-                totalRepositoryContributions
                 contributionCalendar {
                     totalContributions
                     weeks {
@@ -156,11 +152,12 @@ render_profile() {
     local following=$(echo "$viewer" | jq -r '.following.totalCount')
     local repos=$(echo "$viewer" | jq -r '.repositories.totalCount')
     local total_contributions=$(echo "$viewer" | jq -r '.contributionsCollection.contributionCalendar.totalContributions')
-    local commits=$(echo "$viewer" | jq -r '.contributionsCollection.totalCommitContributions')
-    local prs=$(echo "$viewer" | jq -r '.contributionsCollection.totalPullRequestContributions')
-    local issues=$(echo "$viewer" | jq -r '.contributionsCollection.totalIssueContributions')
 
-    # Header
+    # Get today's contributions
+    local weeks=$(echo "$viewer" | jq -r '.contributionsCollection.contributionCalendar.weeks')
+    local last_week=$(echo "$weeks" | jq -r '.[-1].contributionDays')
+    local today_contributions=$(echo "$last_week" | jq -r '.[-1].contributionCount')
+
     echo ""
 
     # User info
@@ -169,25 +166,25 @@ render_profile() {
     else
         echo -e "  ${WHITE}${BOLD}@$login${RESET}"
     fi
-
     [[ -n "$bio" ]] && echo -e "  ${GRAY}$bio${RESET}"
+
     echo ""
 
     # Details
-    [[ -n "$company" ]] && echo -e "  ${CYAN}󰳐${RESET}  $company"
-    [[ -n "$location" ]] && echo -e "  ${CYAN}${RESET}  $location"
-    [[ -n "$website" ]] && echo -e "  ${CYAN}󰖟${RESET}  $website"
-    [[ -n "$twitter" ]] && echo -e "  ${CYAN}${RESET}  @$twitter"
+    [[ -n "$company" ]]  && echo -e "  ${CYAN}󰳐${RESET} $company"
+    [[ -n "$location" ]] && echo -e "  ${CYAN}${RESET} $location"
+    [[ -n "$website" ]]  && echo -e "  ${CYAN}󰖟${RESET} $website"
+    [[ -n "$twitter" ]]  && echo -e "  ${CYAN}${RESET} @$twitter"
 
     echo ""
 
-    # Stats row
+    # Stats
     echo -e "  ${PINK}${RESET} ${WHITE}$followers${RESET} followers  ${GRAY}·${RESET}  ${PINK}${RESET} ${WHITE}$following${RESET} following  ${GRAY}·${RESET}  ${PINK}󰳐${RESET} ${WHITE}$repos${RESET} repos"
+
     echo ""
 
-    # Contribution stats
-    echo -e "  ${YELLOW}${BOLD}$total_contributions${RESET} contributions ${GRAY}(past year)${RESET}"
-    echo -e "  ${GREEN_4}${RESET} ${WHITE}$commits${RESET} commits  ${GREEN_3}${RESET} ${WHITE}$prs${RESET} PRs  ${GREEN_2}${RESET} ${WHITE}$issues${RESET} issues"
+    # Contributions
+    echo -e "  ${YELLOW}${BOLD}$total_contributions${RESET} contributions ${GRAY}(past year)${RESET}  ${GRAY}·${RESET}  ${CYAN}${BOLD}$today_contributions${RESET} today"
 }
 
 # ============================================
