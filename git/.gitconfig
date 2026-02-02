@@ -1,8 +1,6 @@
 [user]
 	email = 62565883+jdragulanescu@users.noreply.github.com
 	name = Johannes Dragulanescu
-	signingkey = 0D19100F1558FDB2
-[commit]
-	gpgsign = true
-[gpg]
-	program = /opt/homebrew/bin/gpg
+
+[include]
+	path = ~/.gitconfig.local

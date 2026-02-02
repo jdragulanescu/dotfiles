@@ -1,0 +1,70 @@
+#!/bin/bash
+# Setup GPG signing for git commits
+# Generates a key if none exists, then configures git
+
+set -e
+
+# Get git user info for key generation
+GIT_NAME=$(git config --get user.name 2>/dev/null || echo "")
+GIT_EMAIL=$(git config --get user.email 2>/dev/null || echo "")
+
+if [ -z "$GIT_NAME" ] || [ -z "$GIT_EMAIL" ]; then
+    echo "Error: git user.name and user.email must be configured"
+    echo "Run: git config --global user.name 'Your Name'"
+    echo "     git config --global user.email 'your@email.com'"
+    exit 1
+fi
+
+# Check for existing GPG keys
+GPG_KEYS=$(gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -E "^sec" | awk '{print $2}' | cut -d'/' -f2)
+
+if [ -z "$GPG_KEYS" ]; then
+    echo "No GPG key found. Generating one..."
+    echo "  Name: $GIT_NAME"
+    echo "  Email: $GIT_EMAIL"
+    echo ""
+
+    # Generate key non-interactively
+    gpg --batch --gen-key <<EOF
+%no-protection
+Key-Type: RSA
+Key-Length: 4096
+Subkey-Type: RSA
+Subkey-Length: 4096
+Name-Real: $GIT_NAME
+Name-Email: $GIT_EMAIL
+Expire-Date: 0
+%commit
+EOF
+
+    echo "GPG key generated successfully"
+    GPG_KEY=$(gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -E "^sec" | head -1 | awk '{print $2}' | cut -d'/' -f2)
+else
+    # Use first key if multiple exist
+    GPG_KEY=$(echo "$GPG_KEYS" | head -1)
+    echo "Using existing GPG key: $GPG_KEY"
+fi
+
+# Create or update .gitconfig.local
+echo ""
+echo "Configuring git to use key $GPG_KEY for signing..."
+
+# Remove existing signing config if present
+if [ -f ~/.gitconfig.local ]; then
+    grep -v "signingkey\|gpgsign" ~/.gitconfig.local > ~/.gitconfig.local.tmp 2>/dev/null || true
+    mv ~/.gitconfig.local.tmp ~/.gitconfig.local 2>/dev/null || true
+fi
+
+# Add signing config
+cat >> ~/.gitconfig.local << EOF
+[user]
+	signingkey = $GPG_KEY
+[commit]
+	gpgsign = true
+EOF
+
+echo "Done! GPG signing configured in ~/.gitconfig.local"
+echo ""
+echo "Public key for GitHub (add at https://github.com/settings/gpg/new):"
+echo ""
+gpg --armor --export "$GPG_KEY"
