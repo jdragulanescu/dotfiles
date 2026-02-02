@@ -1,5 +1,9 @@
 {
   "permissions": {
+    "allow": [
+      "Bash(fd:*)",
+      "Bash(rg:*)"
+    ],
     "deny": [
       "Bash(curl:*)",
       "Read(./.env)",
@@ -32,7 +36,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/skylight/.claude/hooks/sky-check-update.js\""
+            "command": "node \"$HOME/.claude/hooks/sky-check-update.js\""
           }
         ]
       }
