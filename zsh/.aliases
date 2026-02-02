@@ -144,3 +144,8 @@ alias ai-journal="claude /ai-journal"
 
 # AI
 alias cc='claude'
+
+# ============================================
+# GITHUB
+# ============================================
+alias ghp='ghprofile'
