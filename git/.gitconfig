@@ -4,5 +4,3 @@
 	signingkey = 0D19100F1558FDB2
 [commit]
 	gpgsign = true
-[gpg]
-	program = /opt/homebrew/bin/gpg
