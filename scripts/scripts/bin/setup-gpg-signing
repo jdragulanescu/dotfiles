@@ -1,0 +1,67 @@
+#!/bin/bash
+# Setup GPG signing for git commits
+# Run this after importing or generating a GPG key
+
+set -e
+
+# Check for existing GPG keys
+GPG_KEYS=$(gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -E "^sec" | awk '{print $2}' | cut -d'/' -f2)
+
+if [ -z "$GPG_KEYS" ]; then
+    echo "No GPG keys found."
+    echo ""
+    echo "Generate a new key:"
+    echo "  gpg --full-generate-key"
+    echo ""
+    echo "Or import an existing key:"
+    echo "  gpg --import your-key.gpg"
+    echo ""
+    echo "Then run this script again."
+    exit 1
+fi
+
+# If multiple keys, let user choose
+KEY_COUNT=$(echo "$GPG_KEYS" | wc -l)
+if [ "$KEY_COUNT" -gt 1 ]; then
+    echo "Multiple GPG keys found:"
+    echo ""
+    gpg --list-secret-keys --keyid-format LONG
+    echo ""
+    echo -n "Enter the key ID to use for signing: "
+    read GPG_KEY
+else
+    GPG_KEY="$GPG_KEYS"
+    echo "Using GPG key: $GPG_KEY"
+fi
+
+# Verify key exists
+if ! gpg --list-secret-keys "$GPG_KEY" &>/dev/null; then
+    echo "Error: Key $GPG_KEY not found"
+    exit 1
+fi
+
+# Create or update .gitconfig.local
+echo ""
+echo "Configuring git to use key $GPG_KEY for signing..."
+
+# Remove existing signing config if present
+if [ -f ~/.gitconfig.local ]; then
+    # Create temp file without signing config
+    grep -v "signingkey\|gpgsign" ~/.gitconfig.local > ~/.gitconfig.local.tmp 2>/dev/null || true
+    mv ~/.gitconfig.local.tmp ~/.gitconfig.local
+fi
+
+# Add signing config
+cat >> ~/.gitconfig.local << EOF
+[user]
+	signingkey = $GPG_KEY
+[commit]
+	gpgsign = true
+EOF
+
+echo "Done! GPG signing configured in ~/.gitconfig.local"
+echo ""
+echo "Don't forget to add your public key to GitHub:"
+echo "  gpg --armor --export $GPG_KEY"
+echo ""
+echo "Add at: https://github.com/settings/gpg/new"
