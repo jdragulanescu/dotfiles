@@ -95,10 +95,6 @@ alias lta='lt -a'
 # Enhanced file finder with preview using fzf and bat
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 
-
-alias find="fd"
-alias grep="rg"
-
 # ============================================
 # SHORTCUTS
 # ============================================
@@ -108,9 +104,14 @@ alias aliases="code ~/.aliases"
 alias reload="source ~/.zshrc"
 alias path='echo $PATH | tr ":" "\n"'
 alias ip="curl -s ifconfig.me"
-alias localip="ipconfig getifaddr en0"
 alias weather="curl wttr.in/london"
 alias ports="lsof -i -P -n | grep LISTEN"
+
+# Platform-specific: local IP address
+case "$(uname -s)" in
+    Darwin) alias localip="ipconfig getifaddr en0" ;;
+    Linux)  alias localip="hostname -I | awk '{print \$1}'" ;;
+esac
 
 # ============================================
 # BREW
@@ -128,6 +129,12 @@ alias tfa="terraform apply"
 alias tfd="terraform destroy"
 alias tff="terraform fmt"
 alias tfv="terraform validate"
+
+# ============================================
+# TMUX
+# ============================================
+alias tdn="tmux new-session -d -s dev 2>/dev/null; tmux attach -t dev"
+alias tda="tmux attach -t dev"
 
 # ============================================
 # AI
