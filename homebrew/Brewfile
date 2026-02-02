@@ -9,6 +9,7 @@ brew "gh"                         # GitHub CLI
 brew "starship"                   # Shell prompt
 brew "stow"                       # Dotfiles symlink manager
 brew "gitleaks"                   # Secret scanner
+brew "tmux"                       # Terminal multiplexer
 
 # Shell plugins
 brew "zsh-autosuggestions"
