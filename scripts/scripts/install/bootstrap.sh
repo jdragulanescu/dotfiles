@@ -221,37 +221,17 @@ fi
 # ============================================
 # GPG SIGNING SETUP
 # ============================================
-setup_gpg_signing() {
-    # Check if .gitconfig.local already has signing configured
-    if [ -f ~/.gitconfig.local ] && grep -q "signingkey" ~/.gitconfig.local; then
-        echo "GPG signing already configured in ~/.gitconfig.local"
-        return
+if [ -f ~/.gitconfig.local ] && grep -q "signingkey" ~/.gitconfig.local; then
+    echo ""
+    echo "GPG signing already configured"
+else
+    echo ""
+    echo -n "Set up GPG commit signing? [Y/n] "
+    read -r SETUP_GPG
+    if [ "$SETUP_GPG" != "n" ] && [ "$SETUP_GPG" != "N" ]; then
+        ~/dotfiles/scripts/scripts/bin/setup-gpg-signing
     fi
-
-    # Check for existing GPG keys
-    GPG_KEY=$(gpg --list-secret-keys --keyid-format LONG 2>/dev/null | grep -E "^sec" | head -1 | awk '{print $2}' | cut -d'/' -f2)
-
-    if [ -n "$GPG_KEY" ]; then
-        echo "Found GPG key: $GPG_KEY"
-        echo "Configuring git to use this key for signing..."
-        cat >> ~/.gitconfig.local << EOF
-[user]
-	signingkey = $GPG_KEY
-[commit]
-	gpgsign = true
-EOF
-        echo "GPG signing enabled in ~/.gitconfig.local"
-    else
-        echo "No GPG key found. To enable commit signing:"
-        echo "  1. Generate a key: gpg --full-generate-key"
-        echo "  2. Run: ~/scripts/bin/setup-gpg-signing"
-        echo "  (Or import an existing key: gpg --import your-key.gpg)"
-    fi
-}
-
-echo ""
-echo "Checking GPG signing setup..."
-setup_gpg_signing
+fi
 
 echo ""
 echo "=== Bootstrap complete! ==="
@@ -272,5 +252,5 @@ echo "Next steps:"
 echo "  1. Set JetBrains Mono Nerd Font in your terminal app"
 echo "  2. Restart your terminal or run: source ~/.zshrc"
 echo "  3. Run 'gh auth login' to authenticate with GitHub"
-echo "  4. For GPG commit signing: setup-gpg-signing (after importing/generating key)"
+echo "  4. Add your GPG public key to GitHub: https://github.com/settings/gpg/new"
 echo ""
