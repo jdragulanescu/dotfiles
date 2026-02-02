@@ -149,3 +149,17 @@ alias cc='claude'
 # GITHUB
 # ============================================
 alias ghp='ghprofile'
+
+# ============================================
+# SSH
+# ============================================
+
+# Fuzzy search SSH hosts with preview and connect
+sshs() {
+  local host
+  host=$(grep "^Host " ~/.ssh/config 2>/dev/null | grep -v "\*" | cut -d' ' -f2 | \
+    fzf --height 50% --reverse --prompt="ssh > " \
+        --preview "ssh -G {} | grep -E '^(hostname|user|port|identityfile)' | sed 's/^/  /'" \
+        --preview-window=right:40%)
+  [ -n "$host" ] && ssh "$host"
+}
