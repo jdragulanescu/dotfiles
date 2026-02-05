@@ -144,6 +144,7 @@ alias ai-journal="claude /ai-journal"
 
 # AI
 alias cc='claude'
+alias cs='claude-sessions'
 
 # ============================================
 # GITHUB
