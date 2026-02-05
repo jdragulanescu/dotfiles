@@ -22,3 +22,11 @@ Prefer using modern CLI tools:
 
 - Use `fd` instead of `find`
 - Use `rg` instead of `grep`
+
+## Session Titles
+
+- Always start your very first response in a new session with `Title: <concise summary>` on its own line
+- The title should be 5-10 words summarizing what the session is about
+- Examples: `Title: Fix authentication bug in login flow`, `Title: Add dark mode to dashboard`
+- After the title line, continue with your normal response
+- This only applies to the first response in a session — do not repeat it in subsequent messages
