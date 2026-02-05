@@ -18,6 +18,7 @@ fi
 # ============================================
 export PATH="$HOME/scripts/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export GPG_TTY=$(tty)
 
 # Platform detection
