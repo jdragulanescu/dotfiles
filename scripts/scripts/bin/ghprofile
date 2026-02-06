@@ -30,11 +30,11 @@ BOLD='\033[1m'
 DIM='\033[2m'
 
 # Greens for contribution levels (GitHub's actual colors)
-GREEN_0='\033[38;5;238m'   # No contributions (#161b22)
+GREEN_0='\033[38;5;236m'   # No contributions (#161b22)
 GREEN_1='\033[38;5;22m'    # Low (#0e4429)
-GREEN_2='\033[38;5;34m'    # Medium (#006d32)
-GREEN_3='\033[38;5;40m'    # Medium-high (#26a641)
-GREEN_4='\033[38;5;48m'    # High (#39d353)
+GREEN_2='\033[38;5;28m'    # Medium (#006d32)
+GREEN_3='\033[38;5;34m'    # Medium-high (#26a641)
+GREEN_4='\033[38;5;77m'    # High (#39d353)
 
 # UI colors
 CYAN='\033[38;5;117m'
@@ -104,21 +104,6 @@ fetch_github_data() {
 # ============================================
 # RENDER HELPERS
 # ============================================
-get_contribution_color() {
-    local count=$1
-    if [[ $count -eq 0 ]]; then
-        echo -e "${GREEN_0}"
-    elif [[ $count -le 3 ]]; then
-        echo -e "${GREEN_1}"
-    elif [[ $count -le 6 ]]; then
-        echo -e "${GREEN_2}"
-    elif [[ $count -le 9 ]]; then
-        echo -e "${GREEN_3}"
-    else
-        echo -e "${GREEN_4}"
-    fi
-}
-
 repeat_char() {
     local char="$1"
     local count="$2"
@@ -192,31 +177,95 @@ render_profile() {
 # ============================================
 render_graph() {
     local data="$1"
-    local weeks=$(echo "$data" | jq -r '.data.viewer.contributionsCollection.contributionCalendar.weeks')
-    local num_weeks=$(echo "$weeks" | jq 'length')
+    local weeks_json
+    weeks_json=$(echo "$data" | jq -r '.data.viewer.contributionsCollection.contributionCalendar.weeks')
+    local num_weeks
+    num_weeks=$(echo "$weeks_json" | jq 'length')
 
     local start_week=$((num_weeks - DISPLAY_WEEKS))
     [[ $start_week -lt 0 ]] && start_week=0
+    local display_weeks=$((num_weeks - start_week))
+
+    # Pre-extract all data with minimal jq calls (avoids per-cell subprocess)
+    local -a week_dates
+    while IFS= read -r line; do
+        week_dates+=("$line")
+    done < <(echo "$weeks_json" | jq -r '.[].contributionDays[0].date')
+
+    local -a all_counts
+    while IFS= read -r c; do
+        all_counts+=("$c")
+    done < <(echo "$weeks_json" | jq -r '.[].contributionDays[].contributionCount')
+
+    local month_names=("" "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec")
+
+    # Build month header (2 chars per column to match cell width)
+    local header=""
+    for ((i = 0; i < display_weeks; i++)); do
+        header+="  "
+    done
+
+    local prev_month=""
+    for ((i = 0; i < display_weeks; i++)); do
+        local wi=$((start_week + i))
+        local date="${week_dates[$wi]:-}"
+        if [[ -n "$date" ]]; then
+            local month_num=$((10#${date:5:2}))
+            local month_name="${month_names[$month_num]}"
+            if [[ "$month_name" != "$prev_month" ]]; then
+                local pos=$((i * 2))
+                local name_len=${#month_name}
+                if [[ $((pos + name_len)) -le ${#header} ]]; then
+                    header="${header:0:$pos}${month_name}${header:$((pos + name_len))}"
+                fi
+                prev_month="$month_name"
+            fi
+        fi
+    done
 
     echo ""
+    printf "  ${GRAY}    %s${RESET}\n" "$header"
 
-    local days=("Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat")
+    # Day labels (GitHub only shows Mon, Wed, Fri)
+    local day_labels=("" "Mon" "" "Wed" "" "Fri" "")
 
     # Build the graph row by row (each row = day of week)
     for day_idx in 0 1 2 3 4 5 6; do
-        printf "  ${GRAY}%s${RESET} " "${days[$day_idx]}"
+        local label="${day_labels[$day_idx]}"
+        if [[ -n "$label" ]]; then
+            printf "  ${GRAY}%-3s${RESET} " "$label"
+        else
+            printf "      "
+        fi
 
-        # Print each week's contribution for this day
-        for ((week_idx = start_week; week_idx < num_weeks; week_idx++)); do
-            local count=$(echo "$weeks" | jq -r ".[$week_idx].contributionDays[$day_idx].contributionCount // 0")
-            local color=$(get_contribution_color "$count")
+        for ((i = 0; i < display_weeks; i++)); do
+            local wi=$((start_week + i))
+            local idx=$(( wi * 7 + day_idx ))
+            local count=${all_counts[$idx]:-0}
+            local color
+            if [[ $count -eq 0 ]]; then
+                color="${GREEN_0}"
+            elif [[ $count -le 3 ]]; then
+                color="${GREEN_1}"
+            elif [[ $count -le 6 ]]; then
+                color="${GREEN_2}"
+            elif [[ $count -le 9 ]]; then
+                color="${GREEN_3}"
+            else
+                color="${GREEN_4}"
+            fi
             printf "${color}■${RESET} "
         done
         echo ""
     done
 
+    # Legend (right-aligned like GitHub)
     echo ""
-    printf "      ${GRAY}Less${RESET} ${GREEN_0}■${RESET}${GREEN_1}■${RESET}${GREEN_2}■${RESET}${GREEN_3}■${RESET}${GREEN_4}■${RESET} ${GRAY}More${RESET}\n"
+    local total_width=$((6 + display_weeks * 2))
+    local legend_len=19
+    local pad=$((total_width - legend_len))
+    [[ $pad -lt 0 ]] && pad=0
+    printf "%${pad}s${GRAY}Less${RESET} ${GREEN_0}■${RESET} ${GREEN_1}■${RESET} ${GREEN_2}■${RESET} ${GREEN_3}■${RESET} ${GREEN_4}■${RESET} ${GRAY}More${RESET}\n" ""
 }
 
 # ============================================
