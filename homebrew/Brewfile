@@ -51,6 +51,7 @@ cask "warp"                       # Terminal
 cask "cursor"                     # AI code editor
 cask "claude"                     # Claude desktop
 cask "claude-code"                # Claude code editor
+cask "codex"                      # OpenAI Codex CLI
 cask "brave-browser"              # Browser
 cask "obsidian"                   # Notes
 cask "raycast"                    # Launcher
