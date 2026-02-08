@@ -1,6 +1,6 @@
 {
   "permissions": {
-    "allow": ["Bash(fd:*)", "Bash(rg:*)"],
+    "allow": ["Bash(fd:*)", "Bash(rg:*)", "Bash(find:*)", "Bash(ls:*)"],
     "deny": [
       "Bash(curl:*)",
       "Read(./.env)",
@@ -10,6 +10,7 @@
       "Read(**/env.php*)",
       "Read(**/*.pem)",
       "Read(**/*.key)",
+      "Read(**/*credential*)",
       "Read(**/secrets/**)",
       "Read(**/credentials/**)",
       "Read(**/.aws/**)",
