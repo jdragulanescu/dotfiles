@@ -50,8 +50,9 @@ brew "iperf3"                     # Network bandwidth testing
 cask "warp"                       # Terminal
 cask "cursor"                     # AI code editor
 cask "claude"                     # Claude desktop
-cask "claude-code"                # Claude code editor
+cask "claude-code"                # Claude Code CLI
 cask "codex"                      # OpenAI Codex CLI
+cask "codex-app"                  # OpenAI Codex desktop
 cask "brave-browser"              # Browser
 cask "obsidian"                   # Notes
 cask "raycast"                    # Launcher
