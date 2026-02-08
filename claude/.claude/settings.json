@@ -39,6 +39,14 @@
             "command": "node \"$HOME/.claude/hooks/sky-check-update.js\""
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/skylight/.claude/hooks/gsd-check-update.js\""
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -66,7 +74,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "$HOME/.claude/scripts/statusline.js"
+    "command": "$HOME/.claude/scripts/gsd-statusline.js"
   },
   "enabledPlugins": {
     "local-review@agent37-skills": true,
