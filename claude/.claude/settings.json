@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash(fd:*)",
-      "Bash(rg:*)"
-    ],
+    "allow": ["Bash(fd:*)", "Bash(rg:*)"],
     "deny": [
       "Bash(curl:*)",
       "Read(./.env)",
@@ -36,15 +33,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$HOME/.claude/hooks/sky-check-update.js\""
-          }
-        ]
-      },
-      {
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"/Users/skylight/.claude/hooks/gsd-check-update.js\""
+            "command": "node \"$HOME/.claude/hooks/gsd-check-update.js\""
           }
         ]
       }
@@ -74,7 +63,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "$HOME/.claude/scripts/gsd-statusline.js"
+    "command": "$HOME/.claude/scripts/statusline.sh"
   },
   "enabledPlugins": {
     "local-review@agent37-skills": true,
