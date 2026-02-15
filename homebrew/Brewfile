@@ -55,6 +55,7 @@ cask "codex"                      # OpenAI Codex CLI
 cask "codex-app"                  # OpenAI Codex desktop
 cask "brave-browser"              # Browser
 cask "obsidian"                   # Notes
+cask "proton-pass"                # Password manager
 cask "raycast"                    # Launcher
 cask "gcloud-cli"                 # Google Cloud
 cask "gpg-suite"                  # GPG tools
