@@ -1,6 +1,11 @@
 {
   "permissions": {
-    "allow": ["Bash(fd:*)", "Bash(rg:*)", "Bash(find:*)", "Bash(ls:*)"],
+    "allow": [
+      "Bash(fd:*)",
+      "Bash(rg:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)"
+    ],
     "deny": [
       "Bash(curl:*)",
       "Read(./.env)",
@@ -57,6 +62,16 @@
             "type": "command",
             "command": "$HOME/.claude/scripts/log-activity.sh stop",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"/Users/skylight/.claude/hooks/gsd-context-monitor.js\""
           }
         ]
       }
