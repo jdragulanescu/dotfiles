@@ -53,6 +53,14 @@
             "timeout": 5
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 /Users/skylight/.claude/hooks/carl-hook.py"
+          }
+        ]
       }
     ],
     "Stop": [
