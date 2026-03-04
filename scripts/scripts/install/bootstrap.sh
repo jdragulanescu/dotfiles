@@ -232,8 +232,12 @@ if [ -f ~/.gitconfig.local ] && grep -q "signingkey" ~/.gitconfig.local; then
     echo "GPG signing already configured"
 else
     echo ""
-    echo -n "Set up GPG commit signing? [Y/n] "
-    read -r SETUP_GPG
+    if [ -t 0 ]; then
+        echo -n "Set up GPG commit signing? [Y/n] "
+        read -r SETUP_GPG
+    else
+        SETUP_GPG="y"
+    fi
     if [ "$SETUP_GPG" != "n" ] && [ "$SETUP_GPG" != "N" ]; then
         ~/dotfiles/scripts/scripts/bin/setup-gpg-signing
     fi
