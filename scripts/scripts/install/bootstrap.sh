@@ -56,7 +56,13 @@ install_ubuntu_packages() {
     # Install starship
     if ! command -v starship &> /dev/null; then
         echo "Installing starship..."
-        curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
+        curl -sS https://starship.rs/install.sh | sh -s -- -y -b ~/.local/bin
+    fi
+
+    # Install Claude Code
+    if ! command -v claude &> /dev/null; then
+        echo "Installing Claude Code..."
+        curl -fsSL https://claude.ai/install.sh | bash
     fi
 
     # Create symlinks for differently-named binaries on Debian/Ubuntu
