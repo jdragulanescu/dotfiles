@@ -56,7 +56,7 @@ install_ubuntu_packages() {
     # Install starship
     if ! command -v starship &> /dev/null; then
         echo "Installing starship..."
-        curl -sS https://starship.rs/install.sh | sh -s -- -y
+        curl -sS https://starship.rs/install.sh | sudo sh -s -- -y
     fi
 
     # Create symlinks for differently-named binaries on Debian/Ubuntu
