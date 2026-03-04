@@ -8,6 +8,7 @@ tap "homebrew/cask-fonts"
 brew "gh"                         # GitHub CLI
 brew "starship"                   # Shell prompt
 brew "stow"                       # Dotfiles symlink manager
+brew "git-crypt"                  # Git file encryption
 brew "gitleaks"                   # Secret scanner
 brew "tmux"                       # Terminal multiplexer
 
@@ -56,6 +57,7 @@ cask "codex-app"                  # OpenAI Codex desktop
 cask "brave-browser"              # Browser
 cask "obsidian"                   # Notes
 cask "proton-pass"                # Password manager
+cask "protonvpn"                  # VPN
 cask "raycast"                    # Launcher
 cask "gcloud-cli"                 # Google Cloud
 cask "gpg-suite"                  # GPG tools
@@ -72,7 +74,6 @@ cask "font-fira-code"
 # ============================================
 mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
-mas "NordVPN", id: 905953485
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "WhatsApp", id: 310633997
