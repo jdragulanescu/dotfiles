@@ -58,7 +58,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 /Users/skylight/.claude/hooks/carl-hook.py"
+            "command": "python3 \"$HOME/.claude/hooks/carl-hook.py\""
           }
         ]
       }
@@ -79,7 +79,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"/Users/skylight/.claude/hooks/gsd-context-monitor.js\""
+            "command": "node \"$HOME/.claude/hooks/gsd-context-monitor.js\""
           }
         ]
       }
