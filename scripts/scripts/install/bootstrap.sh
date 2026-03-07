@@ -191,7 +191,7 @@ echo "[7/7] Stowing dotfiles..."
 builtin cd ~/dotfiles
 
 # Basic config files
-stow zsh git starship ssh tmux
+stow zsh git starship ssh tmux ghostty
 
 # Packages with existing files (use --adopt)
 stow --adopt claude 2>/dev/null || stow claude
