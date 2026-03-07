@@ -52,6 +52,7 @@ cask "warp"                       # Terminal
 cask "cursor"                     # AI code editor
 cask "claude"                     # Claude desktop
 cask "claude-code"                # Claude Code CLI
+cask "cmux"                       # Tmux session manager
 cask "codex"                      # OpenAI Codex CLI
 cask "codex-app"                  # OpenAI Codex desktop
 cask "brave-browser"              # Browser
