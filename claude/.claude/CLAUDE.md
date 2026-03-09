@@ -31,6 +31,10 @@ Prefer using modern CLI tools:
 - Use `fd` instead of `find`
 - Use `rg` instead of `grep`
 
+## cmux Terminal
+
+When `CMUX_BUNDLE_ID` is set in the environment, you are running inside cmux and have browser automation and pane management via the `cmux` CLI — no need to ping. Load the `/cmux` skill for full command reference. Key rule: always pass `--surface <ref>` to browser commands (get the ref from `cmux browser open` output).
+
 ## Session Titles
 
 - Always start your very first response in a new session with `Title: <concise summary>` on its own line

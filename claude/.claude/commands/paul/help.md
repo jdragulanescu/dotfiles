@@ -52,7 +52,7 @@ Every unit of work follows this cycle:
 | Pre-Planning | discuss, assumptions, discover, consider-issues |
 | Research | research, research-phase |
 | Specialized | flows, config, map-codebase |
-| Quality | verify, plan-fix |
+| Quality | verify, browser-verify, plan-fix |
 
 ---
 
@@ -356,6 +356,20 @@ Guide manual user acceptance testing of recently built features.
 - Records verification results
 
 Usage: `/paul:verify`
+
+---
+
+### `/paul:browser-verify`
+Browser-assisted UAT using cmux browser automation.
+
+- Requires cmux terminal environment
+- Automates browser interactions (navigate, click, fill, snapshot)
+- Claude drives the browser; user confirms visual/UX checks
+- Logs issues with DOM evidence to phase-scoped UAT file
+- Flags non-browser ACs for `/paul:verify`
+
+Usage: `/paul:browser-verify`
+Usage: `/paul:browser-verify 4` (specific phase)
 
 ---
 
