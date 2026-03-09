@@ -4,7 +4,8 @@
       "Bash(fd:*)",
       "Bash(rg:*)",
       "Bash(find:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(cmux:*)"
     ],
     "deny": [
       "Bash(curl:*)",
