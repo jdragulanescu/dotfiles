@@ -57,6 +57,7 @@ cask "codex"                      # OpenAI Codex CLI
 cask "codex-app"                  # OpenAI Codex desktop
 cask "brave-browser"              # Browser
 cask "obsidian"                   # Notes
+cask "proton-mail"                # Email
 cask "proton-pass"                # Password manager
 cask "protonvpn"                  # VPN
 cask "raycast"                    # Launcher
