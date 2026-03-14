@@ -117,6 +117,7 @@ esac
 # BREW
 # ============================================
 alias brewup="brew update && brew upgrade && brew cleanup"
+alias brewup-all="brew update && brew upgrade && brew upgrade --cask --greedy && brew cleanup"
 alias brewdump="brew bundle dump --file=~/dotfiles/homebrew/Brewfile.dump --force"
 
 # ============================================
