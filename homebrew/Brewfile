@@ -35,6 +35,7 @@ brew "vercel-cli"                 # Vercel deployments
 # Version managers
 brew "pyenv"                      # Python version manager
 brew "node"                       # Node.js
+brew "bun"                        # JavaScript runtime & toolkit
 
 # System & Security
 brew "gnupg"                      # GPG encryption
