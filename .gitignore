@@ -62,3 +62,6 @@ cursor/.cursor/extensions/
 cursor/.cursor/plans/
 cursor/.cursor/projects/
 cursor/.cursor/ide_state.json
+
+# Codex config (contains machine-specific project paths)
+codex/.codex/config.toml
