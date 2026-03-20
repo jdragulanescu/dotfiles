@@ -98,5 +98,6 @@
     "code-review@claude-code-plugins": true,
     "warp@claude-code-warp": true
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "effortLevel": "high"
 }
