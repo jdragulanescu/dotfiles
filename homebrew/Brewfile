@@ -6,6 +6,7 @@ tap "homebrew/cask-fonts"
 # CLI TOOLS
 # ============================================
 brew "gh"                         # GitHub CLI
+brew "lazygit"                    # Git TUI
 brew "starship"                   # Shell prompt
 brew "stow"                       # Dotfiles symlink manager
 brew "git-crypt"                  # Git file encryption

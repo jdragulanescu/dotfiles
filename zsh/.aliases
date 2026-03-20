@@ -39,6 +39,7 @@ alias gm="git merge"
 alias gf="git fetch"
 alias gfa="git fetch --all"
 alias gr="git remote -v"
+alias lg="lazygit"
 
 # ============================================
 # DOCKER
