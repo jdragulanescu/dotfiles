@@ -21,13 +21,14 @@ brew bundle --file=~/dotfiles/homebrew/Brewfile
 # Install fzf-tab
 git clone https://github.com/Aloxaf/fzf-tab ~/.zsh/fzf-tab
 
-# Create directory structures for cursor (needs file-level symlinks to prevent data files in repo)
+# Create directory structures for cursor/codex (needs file-level symlinks to prevent data files in repo)
 mkdir -p ~/.cursor/{commands,hooks,skills-cursor}
+mkdir -p ~/.codex/skills
 
 # Stow packages
 cd ~/dotfiles
 stow zsh git starship ssh
-stow --adopt claude cursor  # Use --adopt if files already exist
+stow --adopt claude cursor codex  # Use --adopt if files already exist
 stow docker scripts prompts  # These symlink as entire directories
 ```
 
@@ -54,6 +55,11 @@ stow docker scripts prompts  # These symlink as entire directories
 │       ├── scripts/        # → ~/.claude/scripts (directory symlink)
 │       ├── skills/         # → ~/.claude/skills (directory symlink)
 │       └── sky/            # → ~/.claude/sky (SKY workflow resources)
+├── codex/                  # OpenAI Codex CLI config
+│   └── .codex/
+│       ├── config.toml     # → ~/.codex/config.toml
+│       ├── AGENTS.md       # → ~/.codex/AGENTS.md
+│       └── skills/         # → ~/.codex/skills/* (user-installed only)
 ├── cursor/                 # Cursor editor config
 │   └── .cursor/
 │       ├── argv.json       # → ~/.cursor/argv.json
@@ -93,12 +99,13 @@ Stow creates symlinks from your home directory to the dotfiles repo:
 | `starship/.config/starship.toml` | `~/.config/starship.toml` |
 | `ssh/.ssh/config` | `~/.ssh/config` |
 | `claude/.claude/*` | `~/.claude/*` (subdirs are directory symlinks) |
+| `codex/.codex/*` | `~/.codex/*` (file-level symlinks, create dirs first) |
 | `cursor/.cursor/*` | `~/.cursor/*` |
 | `docker/docker/` | `~/docker` (directory symlink) |
 | `scripts/scripts/` | `~/scripts` (directory symlink) |
 | `prompts/prompts/` | `~/prompts` (directory symlink) |
 
-**Note:** `docker`, `scripts`, `prompts`, and `claude` subdirs (`agents/`, `commands/`, `hooks/`, `scripts/`, `skills/`, `sky/`) are symlinked as entire directories. `cursor` uses file-level symlinks (create target dirs first) to prevent data files from ending up in the repo.
+**Note:** `docker`, `scripts`, `prompts`, and `claude` subdirs (`agents/`, `commands/`, `hooks/`, `scripts/`, `skills/`, `sky/`) are symlinked as entire directories. `cursor` and `codex` use file-level symlinks (create target dirs first) to prevent data files from ending up in the repo.
 
 ## Packages
 

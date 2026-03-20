@@ -183,6 +183,9 @@ mkdir -p ~/.cursor/{commands,hooks,skills-cursor}
 # Claude - create dirs so only config files get symlinked
 mkdir -p ~/.claude/{agents,commands,scripts,skills}
 
+# Codex - create dirs so only config files get symlinked
+mkdir -p ~/.codex/skills
+
 # Remove existing directories if they exist (for folder symlinks)
 rm -rf ~/docker ~/scripts 2>/dev/null || true
 
@@ -196,6 +199,7 @@ stow zsh git starship ssh tmux ghostty
 # Packages with existing files (use --adopt)
 stow --adopt claude 2>/dev/null || stow claude
 stow --adopt cursor 2>/dev/null || stow cursor
+stow --adopt codex 2>/dev/null || stow codex
 
 # Directory-based packages (symlinked as entire directories)
 stow docker scripts
@@ -255,6 +259,7 @@ echo "  ~/.ssh/config   → dotfiles/ssh/.ssh/config"
 echo "  ~/.tmux.conf    → dotfiles/tmux/.tmux.conf"
 echo "  ~/.claude/*     → dotfiles/claude/.claude/*"
 echo "  ~/.cursor/*     → dotfiles/cursor/.cursor/*"
+echo "  ~/.codex/*      → dotfiles/codex/.codex/*"
 echo "  ~/docker/       → dotfiles/docker/docker/"
 echo "  ~/scripts/      → dotfiles/scripts/scripts/"
 echo ""
