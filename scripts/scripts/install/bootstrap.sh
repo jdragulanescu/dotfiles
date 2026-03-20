@@ -183,9 +183,6 @@ mkdir -p ~/.cursor/{commands,hooks,skills-cursor}
 # Claude - create dirs so only config files get symlinked
 mkdir -p ~/.claude/{agents,commands,scripts,skills}
 
-# Codex - create dirs so only config files get symlinked
-mkdir -p ~/.codex/skills
-
 # Remove existing directories if they exist (for folder symlinks)
 rm -rf ~/docker ~/scripts 2>/dev/null || true
 
