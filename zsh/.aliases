@@ -58,21 +58,6 @@ alias drmi="docker rmi"
 alias dprune="docker system prune -af"
 
 # ============================================
-# KUBERNETES
-# ============================================
-alias k="kubectl"
-alias kgp="kubectl get pods"
-alias kgs="kubectl get services"
-alias kgd="kubectl get deployments"
-alias kga="kubectl get all"
-alias kaf="kubectl apply -f"
-alias kdf="kubectl delete -f"
-alias kl="kubectl logs -f"
-alias ke="kubectl exec -it"
-alias kctx="kubectl config use-context"
-alias kns="kubectl config set-context --current --namespace"
-
-# ============================================
 # MODERN REPLACEMENTS
 # ============================================
 
