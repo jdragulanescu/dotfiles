@@ -55,7 +55,7 @@ Output: updated VALIDATION.md + generated test files.
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/validate-phase.md
+@$HOME/.codex/get-shit-done/workflows/validate-phase.md
 </execution_context>
 
 <context>
@@ -63,6 +63,6 @@ Phase: {{GSD_ARGS}} — optional, defaults to last completed phase.
 </context>
 
 <process>
-Execute @/Users/skylight/.codex/get-shit-done/workflows/validate-phase.md.
+Execute @$HOME/.codex/get-shit-done/workflows/validate-phase.md.
 Preserve all workflow gates.
 </process>

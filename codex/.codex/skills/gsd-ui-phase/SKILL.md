@@ -52,8 +52,8 @@ Flow: Validate → Research UI → Verify UI-SPEC → Done
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/ui-phase.md
-@/Users/skylight/.codex/get-shit-done/references/ui-brand.md
+@$HOME/.codex/get-shit-done/workflows/ui-phase.md
+@$HOME/.codex/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>
@@ -61,6 +61,6 @@ Phase number: {{GSD_ARGS}} — optional, auto-detects next unplanned phase if om
 </context>
 
 <process>
-Execute @/Users/skylight/.codex/get-shit-done/workflows/ui-phase.md end-to-end.
+Execute @$HOME/.codex/get-shit-done/workflows/ui-phase.md end-to-end.
 Preserve all workflow gates.
 </process>

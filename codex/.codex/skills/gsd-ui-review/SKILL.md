@@ -52,8 +52,8 @@ Output: {phase_num}-UI-REVIEW.md
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/ui-review.md
-@/Users/skylight/.codex/get-shit-done/references/ui-brand.md
+@$HOME/.codex/get-shit-done/workflows/ui-review.md
+@$HOME/.codex/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>
@@ -61,6 +61,6 @@ Phase: {{GSD_ARGS}} — optional, defaults to last completed phase.
 </context>
 
 <process>
-Execute @/Users/skylight/.codex/get-shit-done/workflows/ui-review.md end-to-end.
+Execute @$HOME/.codex/get-shit-done/workflows/ui-review.md end-to-end.
 Preserve all workflow gates.
 </process>

@@ -50,9 +50,9 @@ Generate a structured SESSION_REPORT.md document capturing session outcomes, wor
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/session-report.md
+@$HOME/.codex/get-shit-done/workflows/session-report.md
 </execution_context>
 
 <process>
-Execute the session-report workflow from @/Users/skylight/.codex/get-shit-done/workflows/session-report.md end-to-end.
+Execute the session-report workflow from @$HOME/.codex/get-shit-done/workflows/session-report.md end-to-end.
 </process>

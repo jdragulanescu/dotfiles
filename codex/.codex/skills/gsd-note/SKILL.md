@@ -57,8 +57,8 @@ Runs inline — no Task, no AskUserQuestion, no Bash.
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/note.md
-@/Users/skylight/.codex/get-shit-done/references/ui-brand.md
+@$HOME/.codex/get-shit-done/workflows/note.md
+@$HOME/.codex/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>
@@ -66,6 +66,6 @@ Runs inline — no Task, no AskUserQuestion, no Bash.
 </context>
 
 <process>
-Execute the note workflow from @/Users/skylight/.codex/get-shit-done/workflows/note.md end-to-end.
+Execute the note workflow from @$HOME/.codex/get-shit-done/workflows/note.md end-to-end.
 Capture the note, list notes, or promote to todo — depending on arguments.
 </process>

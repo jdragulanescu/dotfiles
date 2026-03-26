@@ -52,7 +52,7 @@ Closes the plan → execute → verify → ship loop.
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/ship.md
+@$HOME/.codex/get-shit-done/workflows/ship.md
 </execution_context>
 
-Execute the ship workflow from @/Users/skylight/.codex/get-shit-done/workflows/ship.md end-to-end.
+Execute the ship workflow from @$HOME/.codex/get-shit-done/workflows/ship.md end-to-end.

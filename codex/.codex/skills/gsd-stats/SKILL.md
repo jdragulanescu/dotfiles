@@ -50,9 +50,9 @@ Display comprehensive project statistics including phase progress, plan executio
 </objective>
 
 <execution_context>
-@/Users/skylight/.codex/get-shit-done/workflows/stats.md
+@$HOME/.codex/get-shit-done/workflows/stats.md
 </execution_context>
 
 <process>
-Execute the stats workflow from @/Users/skylight/.codex/get-shit-done/workflows/stats.md end-to-end.
+Execute the stats workflow from @$HOME/.codex/get-shit-done/workflows/stats.md end-to-end.
 </process>
