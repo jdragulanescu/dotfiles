@@ -19,8 +19,8 @@ Routes to the profile-user workflow which orchestrates the full flow: consent ga
 </objective>
 
 <execution_context>
-@/Users/skylight/.claude/get-shit-done/workflows/profile-user.md
-@/Users/skylight/.claude/get-shit-done/references/ui-brand.md
+@$HOME/.claude/get-shit-done/workflows/profile-user.md
+@$HOME/.claude/get-shit-done/references/ui-brand.md
 </execution_context>
 
 <context>
