@@ -48,6 +48,19 @@
 # # Just for example:
 # resize-overlay-duration = 4s 200ms
 
+# Font
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+
+# Window
+background-opacity = 0.9
+background-blur = 20
+window-padding-x = 10
+window-padding-y = 10
+
+# Cursor
+cursor-style = block
+
 # Warp Dark theme
 background = #000000
 foreground = #d9e0e8
@@ -71,3 +84,6 @@ palette = 12=#57c7ff
 palette = 13=#ff6ac1
 palette = 14=#9aedfe
 palette = 15=#f1f1f0
+
+# Reduce dimming of unfocused splits (default 0.75)
+unfocused-split-opacity = 0.95
