@@ -77,14 +77,14 @@
     ],
     "PostToolUse": [
       {
+        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task",
         "hooks": [
           {
             "type": "command",
             "command": "node \"$HOME/.claude/hooks/gsd-context-monitor.js\"",
             "timeout": 10
           }
-        ],
-        "matcher": "Bash|Edit|Write|MultiEdit|Agent|Task"
+        ]
       }
     ],
     "PreToolUse": [
@@ -110,7 +110,8 @@
     "feature-dev@claude-code-plugins": true,
     "security-guidance@claude-code-plugins": true,
     "code-review@claude-code-plugins": true,
-    "warp@claude-code-warp": true
+    "warp@claude-code-warp": true,
+    "gopls-lsp@claude-plugins-official": true
   },
   "alwaysThinkingEnabled": true,
   "effortLevel": "high"
