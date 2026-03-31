@@ -51,39 +51,52 @@
 # Font
 font-family = JetBrainsMono Nerd Font
 font-size = 14
+font-feature = calt
+font-feature = liga
+adjust-cell-height = 2
 
 # Window
-background-opacity = 0.9
+background-opacity = 0.75
 background-blur = 20
 window-padding-x = 10
 window-padding-y = 10
+window-decoration = false
+macos-titlebar-style = hidden
+resize-overlay = never
 
 # Cursor
 cursor-style = block
+cursor-color = #bf40ff
+cursor-text = #000000
+cursor-style-blink = true
 
-# Warp Dark theme
-background = #000000
-foreground = #d9e0e8
+# Selection
+selection-background = #bf40ff
+selection-foreground = #000000
+
+# Purple Cyberpunk (High Contrast)
+background = #12081f
+foreground = #f0e6ff
 
 # Normal colors
-palette = 0=#000000
-palette = 1=#ff5c57
-palette = 2=#5af78e
-palette = 3=#f3f99d
-palette = 4=#57c7ff
-palette = 5=#ff6ac1
-palette = 6=#9aedfe
-palette = 7=#d9e0e8
+palette = 0=#1a1a2e
+palette = 1=#ff2a6d
+palette = 2=#05ffa1
+palette = 3=#f7f052
+palette = 4=#00e5ff
+palette = 5=#c77dff
+palette = 6=#7df9ff
+palette = 7=#d9d9f0
 
 # Bright colors
-palette = 8=#686868
-palette = 9=#ff5c57
-palette = 10=#5af78e
-palette = 11=#f3f99d
-palette = 12=#57c7ff
-palette = 13=#ff6ac1
-palette = 14=#9aedfe
-palette = 15=#f1f1f0
+palette = 8=#4a4a6a
+palette = 9=#ff5588
+palette = 10=#39ffb0
+palette = 11=#fdf480
+palette = 12=#4df0ff
+palette = 13=#e0aaff
+palette = 14=#a0fbff
+palette = 15=#f8f8ff
 
 # Reduce dimming of unfocused splits (default 0.75)
 unfocused-split-opacity = 0.95
