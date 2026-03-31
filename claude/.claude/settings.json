@@ -107,7 +107,7 @@
   "enabledPlugins": {
     "local-review@agent37-skills": true,
     "commit-commands@claude-code-plugins": true,
-    "feature-dev@claude-code-plugins": true,
+    "feature-dev@claude-code-plugins": false,
     "security-guidance@claude-code-plugins": true,
     "code-review@claude-code-plugins": true,
     "warp@claude-code-warp": true,
