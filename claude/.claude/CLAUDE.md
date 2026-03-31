@@ -1,12 +1,25 @@
 # Global Claude Code Guidelines
 
+## Coding standard guidance
+
+- **NEVER** nest ternary operations, extract them into independent statements.
+- Functions should **ALWAYS** have a Cognitive Complexity of maximum 15.
+- **ALWAYS** make sure to check if **typecheck**, **lint**, **format** and **test** pass after finishing a workload. Fix any issues that you find.
+- If existing tests have broken due to changes made, **ALWAYS** ensure the functional code is running properly first, before updating the tests.
+- **ALWAYS** make sure to update the tests for new, updated or altered code.
+- **ALWAYS** write/update comments (jsdoc, inline comments, complex code comments, etc.) when writing new or updating existing functionality/features/bug fixes.
+- **NEVER** over-complicate comments, they need to be straightforward, explaining what the code does, but only if it's not already clear from the code itself.
+- When making changes that affect configuration, implementation flow, or new/altered functionality, **ALWAYS** update the relevant documentation e.g. in `docs/`, to reflect those changes (add, update, or remove as appropriate).
+- If class members aren't being reassigned, **ALWAYS** make them **readonly**.
+
 <!-- CARL-MANAGED: Do not remove this section -->
+
 ## CARL Integration
 
 Follow all rules in <carl-rules> blocks from system-reminders.
 These are dynamically injected based on context and MUST be obeyed.
-<!-- END CARL-MANAGED -->
 
+<!-- END CARL-MANAGED -->
 
 ## Git Commit Rules
 
