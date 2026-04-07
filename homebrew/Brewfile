@@ -53,7 +53,7 @@ brew "iperf3"                     # Network bandwidth testing
 cask "warp"                       # Terminal
 cask "cursor"                     # AI code editor
 cask "claude"                     # Claude desktop
-cask "claude-code"                # Claude Code CLI
+cask "claude-code@latest"         # Claude Code CLI
 cask "cmux"                       # Tmux session manager
 cask "codex"                      # OpenAI Codex CLI
 cask "codex-app"                  # OpenAI Codex desktop
