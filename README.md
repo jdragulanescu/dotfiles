@@ -92,58 +92,61 @@ stow docker scripts prompts  # These symlink as entire directories
 
 Stow creates symlinks from your home directory to the dotfiles repo:
 
-| Source (dotfiles) | Target (home) |
-|-------------------|---------------|
-| `zsh/.zshrc` | `~/.zshrc` |
-| `zsh/.aliases` | `~/.aliases` |
-| `git/.gitconfig` | `~/.gitconfig` |
-| `starship/.config/starship.toml` | `~/.config/starship.toml` |
-| `ssh/.ssh/config` | `~/.ssh/config` |
-| `claude/.claude/*` | `~/.claude/*` (subdirs are directory symlinks) |
-| `codex/.codex/*` | `~/.codex/*` (skills/ is directory symlink) |
-| `cursor/.cursor/*` | `~/.cursor/*` |
-| `docker/docker/` | `~/docker` (directory symlink) |
-| `scripts/scripts/` | `~/scripts` (directory symlink) |
-| `prompts/prompts/` | `~/prompts` (directory symlink) |
+| Source (dotfiles)                | Target (home)                                  |
+| -------------------------------- | ---------------------------------------------- |
+| `zsh/.zshrc`                     | `~/.zshrc`                                     |
+| `zsh/.aliases`                   | `~/.aliases`                                   |
+| `git/.gitconfig`                 | `~/.gitconfig`                                 |
+| `starship/.config/starship.toml` | `~/.config/starship.toml`                      |
+| `ssh/.ssh/config`                | `~/.ssh/config`                                |
+| `claude/.claude/*`               | `~/.claude/*` (subdirs are directory symlinks) |
+| `codex/.codex/*`                 | `~/.codex/*` (skills/ is directory symlink)    |
+| `cursor/.cursor/*`               | `~/.cursor/*`                                  |
+| `docker/docker/`                 | `~/docker` (directory symlink)                 |
+| `scripts/scripts/`               | `~/scripts` (directory symlink)                |
+| `prompts/prompts/`               | `~/prompts` (directory symlink)                |
 
 **Note:** `docker`, `scripts`, `prompts`, `claude` subdirs (`agents/`, `commands/`, `hooks/`, `scripts/`, `skills/`, `sky/`), and `codex` subdirs (`agents/`, `get-shit-done/`, `skills/`) are symlinked as entire directories. `cursor` uses file-level symlinks (create target dirs first) to prevent data files from ending up in the repo.
 
 ## Packages
 
 ### CLI Tools
-| Package | Description |
-|---------|-------------|
-| `gh` | GitHub CLI |
+
+| Package    | Description        |
+| ---------- | ------------------ |
+| `gh`       | GitHub CLI         |
 | `starship` | Cross-shell prompt |
-| `stow` | Symlink manager |
-| `zoxide` | Smarter cd |
-| `fzf` | Fuzzy finder |
-| `gitleaks` | Secret scanner |
+| `stow`     | Symlink manager    |
+| `zoxide`   | Smarter cd         |
+| `fzf`      | Fuzzy finder       |
+| `gitleaks` | Secret scanner     |
 
 ### Zsh Plugins
-| Package | Description |
-|---------|-------------|
-| `zsh-autosuggestions` | History-based suggestions |
-| `zsh-syntax-highlighting` | Command highlighting |
-| `fzf-tab` | Fuzzy tab completion |
+
+| Package                   | Description               |
+| ------------------------- | ------------------------- |
+| `zsh-autosuggestions`     | History-based suggestions |
+| `zsh-syntax-highlighting` | Command highlighting      |
+| `fzf-tab`                 | Fuzzy tab completion      |
 
 ### Modern CLI Replacements
-| Package | Replaces | Description |
-|---------|----------|-------------|
-| `eza` | `ls` | Better ls with icons |
-| `bat` | `cat` | Syntax highlighting |
-| `delta` | `diff` | Better git diffs |
-| `fd` | `find` | Faster find |
-| `ripgrep` | `grep` | Faster grep |
+
+| Package   | Replaces | Description          |
+| --------- | -------- | -------------------- |
+| `eza`     | `ls`     | Better ls with icons |
+| `bat`     | `cat`    | Syntax highlighting  |
+| `delta`   | `diff`   | Better git diffs     |
+| `fd`      | `find`   | Faster find          |
+| `ripgrep` | `grep`   | Faster grep          |
 
 ## Key Bindings
 
-| Key | Action |
-|-----|--------|
-| Tab | Fuzzy complete (fzf-tab) |
-| Ctrl-R | Fuzzy history search |
-| Ctrl-T | Fuzzy file search |
-| → | Accept autosuggestion |
+| Key    | Action                   |
+| ------ | ------------------------ |
+| Tab    | Fuzzy complete (fzf-tab) |
+| Ctrl-R | Fuzzy history search     |
+| Ctrl-T | Fuzzy file search        |
+| →      | Accept autosuggestion    |
 
 ## Stow Commands
 
